@@ -1,0 +1,146 @@
+/* General styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: normal; /* Atur berat font default */
+    background-color: #f5f6fa; /* Warna latar belakang baru */
+}
+
+/* Navbar styling */
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Button hover styling */
+.btn {
+    border-radius: 10px; /* Membuat ujung tombol tidak kotak */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi halus */
+}
+
+/* Navbar link default (idle) styling */
+.nav-link {
+    color: black !important; /* Teks hitam saat posisi diam */
+    background-color: transparent;
+    border: 2px solid transparent; /* Tidak ada border */
+    border-radius: 10px; /* Ujung tombol melengkung */
+    padding: 8px 20px;
+    transition: all 0.3s ease; /* Animasi transisi halus */
+}
+
+/* Navbar link hover state */
+.nav-link:hover {
+    background-color: #ec1c24; /* Warna hover merah lebih gelap */
+    color: white !important; /* Teks putih saat hover */
+    border-color: #ec1c24; /* Tambah border saat hover */
+}
+
+/* Navbar link active state */
+.nav-link.active {
+    background-color: #ec1c24; /* Warna background merah saat aktif */
+    color: white !important; /* Teks putih saat aktif */
+    border-color: #ec1c24; /* Border merah */
+}
+
+/* Navbar transition styling for smoother effect */
+.navbar {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar scroll behavior (Optional) */
+.sticky-top {
+    background-color: white; /* Navbar putih saat posisi scroll */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan untuk efek floating */
+}
+
+/* Card hover effect */
+.card {
+    transition: transform 0.3s ease-in-out, outline 0s ease-in-out; /* Add transition for outline as well */
+}
+
+/* Link card */
+.card a {
+    color: inherit; /* Make sure the link doesn't change the text color */
+    text-decoration: none; /* Remove underline */
+}
+
+.card a:hover {
+    color: inherit; /* Ensure hover doesn't change color */
+}
+
+/* Section hover (for other sections) */
+.section {
+    transition: background-color 0.3s ease;
+}
+
+.section:hover {
+    background-color: #f8f9fa; /* Light background on hover */
+}
+
+/* Alternating section background colors */
+#hero {
+    background-color: #ffccda; /* Light Pink */
+    padding: 100px 0;
+}
+
+#company-profile {
+    background-color: #ffffff; /* White */
+    padding: 100px 0;
+}
+
+/* Modern section separator (border) */
+section {
+    position: relative;
+}
+
+/* Styling untuk judul di setiap section */
+.section-title {
+    color: black; /* Warna teks hitam */
+    font-weight: bold;
+    font-size: 2.5rem; /* Ukuran font lebih besar untuk modern look */
+    text-transform: uppercase; /* Semua huruf kapital untuk kesan elegan */
+    letter-spacing: 1.5px; /* Spasi antar huruf lebih renggang */
+    margin-bottom: 1.5rem; /* Margin bawah untuk ruang */
+    text-align: center; /* Judul di tengah */
+}
+
+/* Subtitle styling */
+.section-subtitle {
+    color: #666; /* Warna teks abu-abu untuk subtitle */
+    font-size: 1.25rem;
+    margin-bottom: 2rem; /* Jarak lebih besar di bawah subtitle */
+    text-align: center;
+}
+
+form .form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+}
+
+form .form-control:focus {
+    border-color: #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn-danger {
+    background-color: #ec1c24;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #C1121B;
+}
+
+/* Hover effect for contact and project boxes */
+.hover-3d-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    border-color: #000;
+}
+
+/* Hover effect for the video wrapper */
+.video-wrapper:hover {
+    transform: scale(1.05); /* Zoom in on hover */
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+    border-color: #000; /* Change border color to red on hover */
+}

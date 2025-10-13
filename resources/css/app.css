@@ -1,0 +1,20 @@
+/* Admin Sidebar */
+#sidebarMenu {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding-top: 3rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#sidebarMenu .nav-link {
+    color: #333;
+}
+
+#sidebarMenu .nav-link.active {
+    font-weight: bold;
+    color: #007bff;
+}
