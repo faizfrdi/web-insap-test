@@ -4,18 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFicoFmsTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('fico_fms', function (Blueprint $table) {
-            $table->id(); // Ini akan jadi "no" (nomor urut/primary key)
+            $table->id();
             $table->string('report');
-            $table->enum('status', ['done', 'on going']);
-            $table->timestamps(); // Ini akan otomatis buat kolom created_at & updated_at
+            $table->string('status'); // contoh: done, on going
+            $table->text('description')->nullable();
+            $table->string('link')->nullable();
+            $table->string('image')->nullable(); // path gambar
+            $table->string('file')->nullable();  // path file
+            $table->timestamps();
         });
     }
 
@@ -27,4 +30,3 @@ class CreateFicoFmsTable extends Migration
         Schema::dropIfExists('fico_fms');
     }
 };
-

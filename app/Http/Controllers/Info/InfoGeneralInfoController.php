@@ -10,23 +10,34 @@ class InfoGeneralInfoController extends Controller
 {
     public function index(Request $request)
     {
-        $status = $request->input('status');
+        $selectedStatuses = $request->input('status', []); 
+        $search = $request->input('q');
 
         $query = InfoGeneral::query();
 
-        // Filter berdasarkan status jika ada
-        if ($status) {
-            $query->where('status', $status);
+        if (!empty($selectedStatuses)) {
+            $validStatuses = array_intersect($selectedStatuses, ['done', 'on going']);
+            
+            if (!empty($validStatuses)) {
+                $query->whereIn('status', $validStatuses);
+            }
         }
 
-        // Urutkan: done dulu, baru ongoing, lalu updated_at desc
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('report', 'like', "%$search%")
+                  ->orWhere('description', 'like', "%$search%")
+                  ->orWhere('status', 'like', "%$search%");
+            });
+        }
+
         $query->orderByRaw("FIELD(status, 'done', 'on going')")
               ->orderByDesc('updated_at')
               ->orderByDesc('created_at');
 
-        // Pagination (10 per halaman)
         $reports = $query->paginate(10)->appends(request()->query());
 
-        return view('info.info-general', compact('reports', 'status'));
+        $status = $request->input('status');
+        return view('info.info-general', compact('reports', 'status', 'search'));
     }
 }

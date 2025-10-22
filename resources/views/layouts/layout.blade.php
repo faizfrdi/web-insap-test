@@ -339,7 +339,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <!-- Beranda Section -->
                     <li class="nav-item me-1">
-                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a>
                     </li>
                     
                     <!-- Scenario Section -->

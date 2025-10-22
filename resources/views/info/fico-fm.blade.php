@@ -47,9 +47,10 @@
             </div>
         </div>
 
-        <!-- Toast Alert -->
-        <div class="position-fixed w-100 d-flex justify-content-end px-3" style="top: 80px; z-index: 2000;">
-            <div id="statusToast" class="toast align-items-center text-white border-0" role="alert" data-bs-delay="3000" style="background-color: #ec1c24; display: none; max-width: 90%;">
+        <!-- Toast Alert --> 
+        <div class="position-fixed" style="top: 100px; right: 20px; z-index: 2000; max-width: 300px; width: auto;">
+            <div id="statusToast" class="toast align-items-center text-white border-0" role="alert" data-bs-delay="3000"
+                style="background-color: #ec1c24; display: none; word-wrap: break-word;">
                 <div class="d-flex">
                     <div class="toast-body">
                         <i class="bi bi-exclamation-circle-fill me-2"></i> Pilih minimal satu status!
@@ -231,49 +232,34 @@
         box-shadow: none;
     }
 </style>
-
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const openModalBtn = document.getElementById('openStatusModalBtn');
-    const statusModal = new bootstrap.Modal(document.getElementById('statusSelectionModal'));
-    const selectAllCheckbox = document.getElementById('selectAllStatus');
-    const statusCheckboxes = document.querySelectorAll('.status-checkbox:not(#selectAllStatus)');
-    const applyBtn = document.getElementById('applyStatusFilterBtn');
-    const toastAlert = new bootstrap.Toast(document.getElementById('statusToast'));
+document.addEventListener("DOMContentLoaded", function () {
+    const openModalBtn = document.getElementById("openStatusModalBtn");
+    const statusModal = new bootstrap.Modal(document.getElementById("statusSelectionModal"));
+    const selectAllCheckbox = document.getElementById("selectAllStatus");
+    const statusCheckboxes = document.querySelectorAll(".status-checkbox:not(#selectAllStatus)");
+    const applyBtn = document.getElementById("applyStatusFilterBtn");
+    const toastAlert = new bootstrap.Toast(document.getElementById("statusToast"));
 
-    // Buka modal + tutup hamburger menu kalau masih terbuka
-    openModalBtn.addEventListener('click', () => {
+    openModalBtn.addEventListener("click", () => {
         statusModal.show();
-
-        // Tutup navbar collapse (hamburger menu) kalau masih terbuka
-        const navbarCollapse = document.querySelector('.navbar-collapse.show');
+        const navbarCollapse = document.querySelector(".navbar-collapse.show");
         if (navbarCollapse) {
             const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
-            if (bsCollapse) {
-                bsCollapse.hide();
-            }
+            if (bsCollapse) bsCollapse.hide();
         }
     });
 
-    // Logic select all
-    selectAllCheckbox.addEventListener('change', function () {
-        if (this.checked) {
-            statusCheckboxes.forEach(cb => {
-                cb.checked = true;
-                cb.disabled = true;
-            });
-        } else {
-            statusCheckboxes.forEach(cb => {
-                cb.disabled = false;
-            });
-        }
-    });
-
-    // Set status centang pas reload
     const urlParams = new URLSearchParams(window.location.search);
-    const selected = urlParams.getAll('status[]');
+    const selected = [];
 
-    if (selected.length === 0 || selected.length === statusCheckboxes.length) {
+    for (const [key, value] of urlParams.entries()) {
+        if (key.startsWith("status")) {
+            selected.push(value);
+        }
+    }
+
+    if (selected.length === 0) {
         selectAllCheckbox.checked = true;
         statusCheckboxes.forEach(cb => {
             cb.checked = true;
@@ -287,22 +273,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Apply tombol
-    applyBtn.addEventListener('click', function () {
-        const checked = Array.from(statusCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
+    selectAllCheckbox.addEventListener("change", function () {
+        if (this.checked) {
+            statusCheckboxes.forEach(cb => {
+                cb.checked = true;
+                cb.disabled = true;
+            });
+        } else {
+            statusCheckboxes.forEach(cb => (cb.disabled = false));
+        }
+    });
+
+    applyBtn.addEventListener("click", function () {
+        const checked = Array.from(statusCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
 
         if (selectAllCheckbox.checked) {
-            window.location.href = window.location.pathname; // reset filter
+            window.location.href = window.location.pathname;
             return;
         }
 
         if (checked.length === 0) {
-            document.getElementById('statusToast').style.display = 'block';
+            document.getElementById("statusToast").style.display = "block";
             toastAlert.show();
             return;
         }
 
-        document.getElementById('statusFilterForm').submit();
+        document.getElementById("statusFilterForm").submit();
     });
 });
 </script>
